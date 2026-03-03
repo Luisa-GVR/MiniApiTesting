@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Task Manager"/>
+  <title>Task manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="topbar" role="banner">
+    <nav aria-label="Ubicación actual">
+      <ol class="breadcrumb">
+        <li>Task Manager Project</li>
+        <li aria-current="page">Board</li>
+      </ol>
+    </nav>
+    <p class="api-badge">API: <code id="apiLabel"></code></p>
+  </header>
+
+  <main id="main-content">
+
+    <section class="board-header" aria-labelledby="board-title">
+      <h1 id="board-title">Sprint Board</h1>
+      <p class="board-meta">
+        <span class="meta-chip"        id="totalChip" aria-live="polite">— tasks</span>
+        <span class="meta-chip done"   id="doneChip"  aria-live="polite">— done</span>
+        <span class="meta-tip" aria-hidden="true">Arrastra las tarjetas para cambiar su estado</span>
+      </p>
+      <button class="btn-primary" id="openModalBtn" aria-haspopup="dialog">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Nueva tarea
+      </button>
+    </section>
+
+    <!-- "Tablero kanban" 2 columnas-->
+    <section class="board" aria-label="Tablero kanban">
+
+      <section class="column" aria-labelledby="col-todo-title" id="col-todo">
+        <header class="col-header">
+          <h2 class="col-title" id="col-todo-title">
+            <span class="col-dot todo" aria-hidden="true"></span>
+            Por hacer
+          </h2>
+          <output class="col-count" id="count-todo" for="list-todo" aria-label="Tareas pendientes">0</output>
+        </header>
+        <ol class="col-body" id="list-todo" data-completed="false" aria-label="Lista de tareas pendientes" aria-live="polite">
+        </ol>
+      </section>
+
+      <section class="column" aria-labelledby="col-done-title" id="col-done">
+        <header class="col-header">
+          <h2 class="col-title" id="col-done-title">
+            <span class="col-dot done" aria-hidden="true"></span>
+            Completadas
+          </h2>
+          <output class="col-count" id="count-done" for="list-done" aria-label="Tareas completadas">0</output>
+        </header>
+        <ol class="col-body" id="list-done" data-completed="true" aria-label="Lista de tareas completadas" aria-live="polite">
+        </ol>
+      </section>
+
+    </section>
+
+  </main>
+
+  <!-- Add Task Dialog -->
+  <dialog id="taskDialog" aria-labelledby="dialog-title">
+    <article class="modal">
+      <header class="modal-header">
+        <h2 class="modal-title" id="dialog-title">Nueva tarea</h2>
+        <button class="modal-close" id="closeModalBtn" aria-label="Cerrar diálogo">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </header>
+      <form method="dialog" id="taskForm" novalidate>
+        <label class="field-label" for="taskInput">Título de la tarea</label>
+        <input
+          type="text"
+          id="taskInput"
+          name="title"
+          placeholder="ej. Corregir bug de login"
+          autocomplete="off"
+          maxlength="200"
+          required
+          aria-required="true"
+          aria-describedby="taskInputError"
+        />
+        <p class="field-error" id="taskInputError" role="alert" aria-live="assertive"></p>
+        <footer class="modal-footer">
+          <button type="button" class="btn-ghost" id="cancelBtn">Cancelar</button>
+          <button type="submit" class="btn-primary" id="addBtn">Crear tarea</button>
+        </footer>
+      </form>
+    </article>
+  </dialog>
+
+  <!-- Status toast -->
+  <output class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></output>
+
+  <script src="app.js"></script>
+</body>
+</html>
