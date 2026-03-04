@@ -267,6 +267,40 @@ function removePlaceholder() {
   });
 });
 
+// Polling para sincronizar entre usuarios
+const POLL_INTERVAL = 8000;
+
+async function pollTasks() {
+  try {
+    const ctrl       = new AbortController();
+    const serverData = await API.getTasks(ctrl.signal);
+
+    // Solo re-renderiza si algo cambió (comparación simple de JSON, asumiendo que el orden y formato son consistentes)
+    const localJSON  = JSON.stringify(tasks);
+    const serverJSON = JSON.stringify(serverData);
+
+    if (localJSON !== serverJSON) {
+      tasks = serverData;
+      renderAll();
+      showToast('Tablero actualizado');
+    }
+  } catch (err) {
+    if (err.name === 'AbortError') return;
+    // Silent fail en polling para no molestar al usuario, pero logueamos el error para debugging
+    console.warn('Poll failed:', err.message);
+  }
+}
+
+// Pausar polling mientras el usuario está arrastrando
+// para no pisar su interacción con un re-render
+let isDragging = false;
+document.addEventListener('dragstart', () => (isDragging = true));
+document.addEventListener('dragend',   () => (isDragging = false));
+
+setInterval(() => {
+  if (!isDragging && !taskDialog.open) pollTasks();
+}, POLL_INTERVAL);
+
 
 // Funciones de interacción con API
 
