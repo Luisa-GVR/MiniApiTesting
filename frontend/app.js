@@ -2,6 +2,8 @@
 //  - Local (node server.js):  cambia a 'http://localhost:3000/tasks'
 //  - Render / producción:     '/tasks' 
 
+const { clear } = require("node:console");
+
 const API_URL = '/tasks';
 
 document.getElementById('apiLabel').textContent =
@@ -271,11 +273,16 @@ function removePlaceholder() {
 const POLL_INTERVAL = 8000;
 
 async function pollTasks() {
+
+  // Cancelar peticion si no responde
+  const ctrl = new AbortController();
+  const timeout = setTimeout(() => ctrl.abort(), 5000);
+
   try {
     const ctrl       = new AbortController();
     const serverData = await API.getTasks(ctrl.signal);
 
-    // Solo re-renderiza si algo cambió (comparación simple de JSON, asumiendo que el orden y formato son consistentes)
+    // Solo re-renderiza si algo cambió
     const localJSON  = JSON.stringify(tasks);
     const serverJSON = JSON.stringify(serverData);
 
@@ -288,6 +295,8 @@ async function pollTasks() {
     if (err.name === 'AbortError') return;
     // Silent fail en polling para no molestar al usuario, pero logueamos el error para debugging
     console.warn('Poll failed:', err.message);
+  } finally {
+    clearTimeout(timeout); // Limpiar timeout de abort
   }
 }
 

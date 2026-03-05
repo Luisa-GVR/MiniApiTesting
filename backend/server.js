@@ -62,10 +62,10 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`✅  Task Manager en http://localhost:${PORT}`);
-  console.log(`    GET    /tasks`);
-  console.log(`    POST   /tasks`);
-  console.log(`    PUT    /tasks/:id`);
-  console.log(`    PUT    /tasks/reorder`);
-  console.log(`    DELETE /tasks/:id`);
+  console.log(`Task Manager en http://localhost:${PORT}`);
+  console.log(`GET    /tasks`);
+  console.log(`POST   /tasks`);
+  console.log(`PUT    /tasks/:id`);
+  console.log(`PUT    /tasks/reorder`);
+  console.log(`DELETE /tasks/:id`);
 });
