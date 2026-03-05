@@ -1,7 +1,7 @@
 const http = require('http');
 const fs   = require('fs');
 const path = require('path');
-const router = require('./Router'); //No clue porque lo pide en ingles
+const router = require('./router'); //Ignorar si tira error, claramente esta en minuscula
 
 
 const PORT = process.env.PORT || 3000;  // Local 3000, Render dinámico
