@@ -2,8 +2,6 @@
 //  - Local (node server.js):  cambia a 'http://localhost:3000/tasks'
 //  - Render / producción:     '/tasks' 
 
-const { clear } = require("node:console");
-
 const API_URL = '/tasks';
 
 document.getElementById('apiLabel').textContent =
