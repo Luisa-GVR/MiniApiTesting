@@ -1,11 +1,19 @@
 const TasksController = require('./controllers/tasks');
+const AuthController  = require('./controllers/auth');
+const { requireAuth } = require('./middleware/auth');
 
-// Rutas
+// Rutas de taska
 // GET    /tasks
 // POST   /tasks
 // PUT    /tasks/:id
 // PUT    /tasks/reorder
 // DELETE /tasks/:id
+// GET  /auth/me
+
+// Publicas:
+//   POST /auth/register
+//   POST /auth/login
+//   POST /auth/logout
 
 function router(req, res) {
   const { method, url } = req;
@@ -15,6 +23,42 @@ function router(req, res) {
     res.sendJSON(200, {}); 
     return;
   }
+
+  //Rutas de autenticacion
+
+  // POST /auth/register
+  if (method === 'POST' && url === '/auth/register') {
+    AuthController.register(req, res);
+    return;
+  }
+
+  // POST /auth/login
+  if (method === 'POST' && url === '/auth/login') {
+    AuthController.login(req, res);
+    return;
+  }
+
+  // POST /auth/logout
+  if (method === 'POST' && url === '/auth/logout') {
+    AuthController.logout(req, res);
+    return;
+  }
+
+  //Con usuario
+
+  // GET /auth/me
+  if (method === 'GET' && url === '/auth/me') {
+    const authenticated = requireAuth(req, res);
+    if (!authenticated) return;
+    AuthController.me(req, res);
+    return;
+  }
+
+  // Requerir autenticacion para las rutas de tareas
+
+  const authenticated = requireAuth(req, res);
+  if (!authenticated) return;
+
 
   // GET /tasks
   if (method === 'GET' && url === '/tasks') {
