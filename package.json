@@ -1,0 +1,16 @@
+{
+  "name": "task-manager-api",
+  "version": "3.0.0",
+  "description": "Task Manager",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

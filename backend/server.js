@@ -1,11 +1,12 @@
 const http = require('http');
 const fs   = require('fs');
 const path = require('path');
+
+
 const router = require('./router'); //Ignorar si tira error, claramente esta en minuscula
 
 
 const PORT = process.env.PORT || 3000;  // Local 3000, Render dinámico
-const DATA_FILE = path.join(__dirname, 'tasks.json');
 const FRONTEND_DIR = path.join(__dirname, '..', 'frontend');
 
 
@@ -36,6 +37,8 @@ function decorateResponse(res) {
       'Access-Control-Allow-Origin':  '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Credentials': 'true',  // cookies cross origin para front-back
+
     });
     res.end(JSON.stringify(data));
   };
@@ -47,15 +50,18 @@ function decorateResponse(res) {
 const server = http.createServer((req, res) => {
   decorateResponse(res);
 
-  // Rutas
-  if (req.url.startsWith('/tasks') || req.method === 'OPTIONS') {
-    router(req, res); return;
+  const isApiRoute = req.url.startsWith('/tasks') || req.url.startsWith('/auth')  || req.method === 'OPTIONS';
+
+  if (isApiRoute) {
+    router(req, res);
+    return;
   }
 
   // Leer el index.html
   if (req.method === 'GET') {
     const fileName = req.url === '/' ? 'index.html' : req.url.replace(/^\//, '');
-    serveStatic(res, path.join(FRONTEND_DIR, fileName)); return;
+    serveStatic(res, path.join(FRONTEND_DIR, fileName)); 
+    return;
   }
 
   res.sendJSON(404, { error: 'Ruta no encontrada' });
@@ -63,6 +69,12 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`Task Manager en http://localhost:${PORT}`);
+  console.log(`Rutas publicas:`);
+  console.log(`POST /auth/register`);
+  console.log(`POST /auth/login`);
+  console.log(`POST /auth/logout`);
+  console.log(`Rutas protegidas:`);
+  console.log(`GET    /auth/me`);
   console.log(`GET    /tasks`);
   console.log(`POST   /tasks`);
   console.log(`PUT    /tasks/:id`);

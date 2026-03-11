@@ -1,7 +1,12 @@
 [
   {
     "id": 1,
-    "title": "Corregir bugs",
+    "title": "Estudiar Web APIs",
     "completed": true
+  },
+  {
+    "id": 2,
+    "title": "try",
+    "completed": false
   }
 ]
