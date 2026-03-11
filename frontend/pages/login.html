@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Task Manager — Iniciar sesión"/>
+  <title>TaskFlow — Iniciar sesión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/login.css"/>
+</head>
+<body class="auth-page">
+
+  <main class="auth-main" id="main-content">
+
+    <header class="auth-logo" aria-label="TaskFlow">
+      <svg width="28" height="28" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <rect x="1"  y="1"  width="9" height="9" rx="2" fill="var(--accent)"/>
+        <rect x="12" y="1"  width="9" height="9" rx="2" fill="var(--accent)" opacity=".4"/>
+        <rect x="1"  y="12" width="9" height="9" rx="2" fill="var(--accent)" opacity=".4"/>
+        <rect x="12" y="12" width="9" height="9" rx="2" fill="var(--accent)"/>
+      </svg>
+      <span>TaskFlow</span>
+    </header>
+
+    <article class="auth-card">
+
+      <!-- Tabs: Login / Register -->
+      <nav class="auth-tabs" aria-label="Modo de acceso">
+        <button
+          class="auth-tab active"
+          id="tabLogin"
+          aria-selected="true"
+          aria-controls="formLogin">
+          Iniciar sesión
+        </button>
+        <button
+          class="auth-tab"
+          id="tabRegister"
+          aria-selected="false"
+          aria-controls="formRegister">
+          Crear cuenta
+        </button>
+      </nav>
+
+      <!-- Login form -->
+      <section id="formLogin" aria-labelledby="tabLogin">
+        <form id="loginForm" novalidate>
+          <label class="field-label" for="loginUsername">Usuario</label>
+          <input
+            type="text"
+            id="loginUsername"
+            name="username"
+            placeholder="tu_usuario"
+            autocomplete="username"
+            required
+            aria-required="true"
+          />
+
+          <label class="field-label" for="loginPassword">Contraseña</label>
+          <input
+            type="password"
+            id="loginPassword"
+            name="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            required
+            aria-required="true"
+          />
+
+          <p class="field-error" id="loginError" role="alert" aria-live="assertive"></p>
+
+          <button type="submit" class="btn-primary btn-full" id="loginBtn">
+            Iniciar sesión
+          </button>
+        </form>
+      </section>
+
+      <!-- Register form -->
+      <section id="formRegister" aria-labelledby="tabRegister" hidden>
+        <form id="registerForm" novalidate>
+          <label class="field-label" for="registerUsername">Usuario</label>
+          <input
+            type="text"
+            id="registerUsername"
+            name="username"
+            placeholder="min. 3 caracteres"
+            autocomplete="username"
+            required
+            aria-required="true"
+          />
+
+          <label class="field-label" for="registerPassword">Contraseña</label>
+          <input
+            type="password"
+            id="registerPassword"
+            name="password"
+            placeholder="min. 6 caracteres"
+            autocomplete="new-password"
+            required
+            aria-required="true"
+          />
+
+          <p class="field-error" id="registerError" role="alert" aria-live="assertive"></p>
+
+          <button type="submit" class="btn-primary btn-full" id="registerBtn">
+            Crear cuenta
+          </button>
+        </form>
+      </section>
+
+    </article>
+
+  </main>
+
+  <output class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></output>
+
+  <script src="/js/auth.js"></script>
+</body>
+</html>
