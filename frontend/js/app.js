@@ -2,7 +2,7 @@
 //  - Local (node server.js):  cambia a 'http://localhost:3000/tasks'
 //  - Render / producción:     '/tasks' 
 
-const API_URL = 'http://localhost:3000/tasks';
+const API_URL = '/tasks';
 
 document.getElementById('apiLabel').textContent =
   API_URL.startsWith('/') ? window.location.host + API_URL : API_URL;
