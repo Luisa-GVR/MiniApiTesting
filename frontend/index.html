@@ -7,7 +7,7 @@
   <title>Task manager</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
 
@@ -19,6 +19,15 @@
       </ol>
     </nav>
     <p class="api-badge">API: <code id="apiLabel"></code></p>
+
+    <button class="btn-logout" id="logoutBtn" aria-label="Cerrar sesión">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M5 2H2a1 1 0 00-1 1v8a1 1 0 001 1h3M9 10l3-3-3-3M12 7H5"
+              stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Salir
+    </button>
+    
   </header>
 
   <main id="main-content">
@@ -105,6 +114,6 @@
   <!-- Status toast -->
   <output class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></output>
 
-  <script src="app.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 </html>
