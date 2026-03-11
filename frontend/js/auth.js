@@ -1,8 +1,8 @@
 //  CONFIGURACIÓN
 //  - Local (node server.js):  cambia a 'http://localhost:3000/'
-//  - Render / producción:     '/' 
+//  - Render / producción:     '' 
 
-const API_BASE = 'http://localhost:3000/';
+const API_BASE = '';
 
 
 // DOM
