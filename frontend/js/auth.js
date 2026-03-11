@@ -107,7 +107,7 @@ async function handleLogin(event) {
     }
 
     try {
-        const result = await sendRequest('auth/login', 'POST', { username, password });
+        const result = await sendRequest('/auth/login', 'POST', { username, password });
         if (result.error) {
             loginError.textContent = result.error;
         } else {
@@ -131,7 +131,7 @@ async function handleRegister(event) {
     }
 
     try {
-        const result = await sendRequest('auth/register', 'POST', { username, password });
+        const result = await sendRequest('/auth/register', 'POST', { username, password });
         if (result.error) {
             registerError.textContent = result.error;
         } else {
