@@ -1,5 +1,6 @@
 const TasksController = require('./controllers/tasks');
 const AuthController  = require('./controllers/auth');
+const CommentsController = require('./controllers/comments');
 const { requireAuth } = require('./middleware/auth');
 
 // Rutas de taska
@@ -89,6 +90,27 @@ function router(req, res) {
   const deleteMatch = url.match(/^\/tasks\/(\d+)$/);
   if (method === 'DELETE' && deleteMatch) {
     TasksController.deleteTask(req, res, parseInt(deleteMatch[1])); 
+    return;
+  }
+
+  // Rutas de comentarios - protegidas
+
+  // GET /comments ... ?taskId=123
+  if (method === 'GET' && url.startsWith('/comments')) {
+    CommentsController.getComments(req, res);
+    return;
+  }
+
+  // POST /comments
+  if (method === 'POST' && url === '/comments') {
+    CommentsController.createComment(req, res);
+    return;
+  }
+
+   // DELETE /comments/:id 
+  const deleteCommentMatch = url.match(/^\/comments\/(\d+)$/);
+  if (method === 'DELETE' && deleteCommentMatch) {
+    CommentsController.deleteComment(req, res, parseInt(deleteCommentMatch[1]));
     return;
   }
 

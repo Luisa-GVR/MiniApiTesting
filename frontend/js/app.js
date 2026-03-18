@@ -72,6 +72,7 @@ const API = {
 let tasks = [];
 
 let loadController = null;
+let currentUser = null;
 
 
 // Validación de input
@@ -147,6 +148,19 @@ function createCard(task) {
       <p class="card-id">TASK-${String(task.id).padStart(3, '0')}</p>
       <p class="card-title">${escapeHtml(task.title)}</p>
     </div>
+    
+    <button class="card-comments"
+            data-action="comments"
+            data-uid="${task.uid}"
+            data-title="${escapeHtml(task.title)}"
+            aria-label="Ver comentarios de: ${escapeHtml(task.title)}">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M1 1h10v7.5H6.5L4 10.5V8.5H1z"
+              stroke="currentColor" stroke-width="1.3" fill="none" stroke-linejoin="round"/>
+      </svg>
+      Comentarios
+    </button>
+    
     <button class="card-delete"
             data-action="delete"
             data-id="${task.id}"
@@ -438,6 +452,16 @@ document.addEventListener('click', e => {
   // Click en el backdrop del dialog
   if (target === taskDialog) { closeModal(); return; }
 
+  // Botón ver comentarios (data-action="comments")
+  const commentsBtn = target.closest('[data-action="comments"]');
+  if (commentsBtn) {
+    e.stopPropagation();
+    
+    const taskUid  = commentsBtn.dataset.uid;
+    const title = commentsBtn.dataset.title || 'Tarea sin título';
+    openCommentsDialog(taskUid, title); // funcion definida en comments.js
+    return;
+  }
 
   // Botón eliminar tarjeta (data-action="delete")
   const deleteBtn = target.closest('[data-action="delete"]');
@@ -488,6 +512,7 @@ async function checkAuth() {
 async function init() {
   const user = await checkAuth();
   if (!user) return;
+  currentUser = user;
   loadTasks();
 }
 

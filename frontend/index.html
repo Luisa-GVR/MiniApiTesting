@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/comments.css"/>
 </head>
 <body>
 
@@ -111,9 +112,57 @@
     </article>
   </dialog>
 
+  <!-- Comment Dialog -->
+  <dialog id="commentsDialog" aria-labelledby="comments-dialog-title">
+    <article class="modal modal--wide">
+ 
+      <header class="modal-header">
+        <div class="modal-header-info">
+          <p class="modal-task-label" id="commentsTaskLabel">TASK-001</p>
+          <h2 class="modal-title" id="comments-dialog-title">Comentarios</h2>
+        </div>
+
+        <button class="modal-close" id="closeCommentsBtn" aria-label="Cerrar comentarios">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+      </header>
+ 
+      <!-- Lista de comentarios-->
+      <div class="comments-scroll" role="region" aria-label="Lista de comentarios" aria-live="polite">
+        <ol class="comments-list" id="commentsList"></ol>
+      </div>
+ 
+      <!-- Form nuevo comentario raiz -->
+      <form class="comment-form" id="commentForm" novalidate>
+        <div class="comment-form-inputs">
+
+          <textarea id="commentMessage" placeholder="Escribe un comentario... (mín. 5 caracteres)" maxlength="500"
+            rows="2" required aria-required="true"
+            aria-label="Mensaje del comentario"
+            aria-describedby="commentError"></textarea>
+
+        </div>
+        <p class="field-error" id="commentError" role="alert" aria-live="assertive"></p>
+        <div class="comment-form-footer">
+          <button type="submit" class="btn-primary" id="commentSubmitBtn">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Comentar
+          </button>
+        </div>
+      </form>
+ 
+    </article>
+  </dialog>
+
   <!-- Status toast -->
   <output class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></output>
 
   <script src="/js/app.js"></script>
+  <script src="/js/comments.js"></script>
 </body>
 </html>

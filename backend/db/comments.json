@@ -1,0 +1,64 @@
+[
+  {
+    "id": 1,
+    "parentId": null,
+    "username": "antiluisa",
+    "message": "muerte a la luisa",
+    "date": "2026-03-18T00:30:19.794Z",
+    "deleted": false
+  },
+  {
+    "id": 2,
+    "taskUid": "mmvb1e6ct814p",
+    "parentId": null,
+    "username": "Deleted",
+    "message": "[Comment deleted]",
+    "date": "2026-03-18T00:36:36.243Z",
+    "deleted": true
+  },
+  {
+    "id": 3,
+    "taskUid": "mmvb1e6ct814p",
+    "parentId": 2,
+    "username": "luisa",
+    "message": "ey que mala onda:(",
+    "date": "2026-03-18T00:36:53.145Z",
+    "deleted": false
+  },
+  {
+    "id": 4,
+    "taskUid": "mmvba5v5ptk4c",
+    "parentId": null,
+    "username": "luisa",
+    "message": "lol :P",
+    "date": "2026-03-18T00:37:15.477Z",
+    "deleted": false
+  },
+  {
+    "id": 5,
+    "taskUid": "mmvba5v5ptk4c",
+    "parentId": 4,
+    "username": "luisa",
+    "message": "jola?",
+    "date": "2026-03-18T00:38:17.517Z",
+    "deleted": false
+  },
+  {
+    "id": 6,
+    "taskUid": "mmvb1e6ct814p",
+    "parentId": null,
+    "username": "luisa",
+    "message": "que forma tan grosera de testear...",
+    "date": "2026-03-18T00:38:30.274Z",
+    "deleted": false
+  },
+  {
+    "id": 8,
+    "taskUid": "mmvba5v5ptk4c",
+    "parentId": 4,
+    "username": "antiluisa",
+    "message": "mmm ok...",
+    "date": "2026-03-18T00:47:40.175Z",
+    "deleted": false
+  }
+]

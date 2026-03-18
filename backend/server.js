@@ -50,7 +50,8 @@ function decorateResponse(res) {
 const server = http.createServer((req, res) => {
   decorateResponse(res);
 
-  const isApiRoute = req.url.startsWith('/tasks') || req.url.startsWith('/auth')  || req.method === 'OPTIONS';
+  const isApiRoute = req.url.startsWith('/tasks') || req.url.startsWith('/auth') || 
+                   req.url.startsWith('/comments') || req.method === 'OPTIONS';
 
   if (isApiRoute) {
     router(req, res);

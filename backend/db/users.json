@@ -3,5 +3,15 @@
     "id": 1,
     "username": "prueba",
     "password": "$2a$10$v2MIWtXC4UMIzSy2M6XqEeXpa3z/9QMXNlmZl.tZ0LnuPrn.jhqs."
+  },
+  {
+    "id": 2,
+    "username": "luisa",
+    "password": "$2a$10$0XEY0pWrKeZwAbDhT/7vb.3LT8SPndFo6kT5qFMsgLCX59LPJ6J8e"
+  },
+  {
+    "id": 3,
+    "username": "antiluisa",
+    "password": "$2a$10$cGZdQRy4/MFqgmYOwjmlFugt2EA/wE/qK25A7CCSBmzGtDdTPFfn2"
   }
 ]

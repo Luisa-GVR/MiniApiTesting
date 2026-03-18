@@ -1,7 +1,7 @@
 const fs   = require('fs');
 const path = require('path');
 
-const DATA_FILE = path.join(__dirname, '..', 'tasks.json');
+const DATA_FILE = path.join(__dirname, '..', 'db', 'tasks.json');
 
 // Helpers de escritura
 
@@ -76,9 +76,14 @@ async function createTask(req, res) {
     } else {
       nextId = 1;
     }
+
+    function generateUid() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+    }
     
     const newTask = {
       id:        nextId,
+      uid:       generateUid(),
       title:     body.title.trim(),
       completed: Boolean(body.completed !== undefined ? body.completed : false),
     };
@@ -150,6 +155,7 @@ async function reorderTasks(req, res) {
       if (task) {
         const reorderedTask = {
           id:        index + 1,
+          uid:       task.uid,
           title:     task.title,
           completed: task.completed,
         };
